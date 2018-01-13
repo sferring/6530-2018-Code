@@ -1,5 +1,6 @@
 package org.usfirst.frc.team6530.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -22,9 +23,20 @@ public class Robot extends IterativeRobot {
 	Victor rightFrontDrive = new Victor(1);
 	// Setup a button function on a Victor so we first define the victor
 	Victor gearSpit = new Victor(4);
+	// Setup the compressor
+	Compressor c = new Compressor(0);
+	
 	// Setup a button function for a solenoid so we first define the solenoids on ports 1 and 2
 	Solenoid pistonExtend = new Solenoid(1);
 	Solenoid pistonRetract = new Solenoid(2);
+	/*
+	There is also a DoubleSolenoid class I don't know how to use those yet, but here is the structure
+	DoubleSolenoid exampleDouble = new DoubleSolenoid(1, 2);
+
+	exampleDouble.set(DoubleSolenoid.Value.kOff);
+	exampleDouble.set(DoubleSolenoid.Value.kForward);
+	exampleDouble.set(DoubleSolenoid.Value.kReverse);
+	*/
 	
 	//Setup strings for picking Auto code from the driver station... I think
 	final String defaultAuto = "Default";
@@ -91,7 +103,10 @@ public class Robot extends IterativeRobot {
 		
 		//Send Joystick values to the driver motors
 		leftFrontDrive.set(leftStickValue);
-		rightFrontDrive.set(rishtStickValue);
+		rightFrontDrive.set(rightStickValue);
+		
+		// I think we still need to turn on the compressor, so to do that we do this:
+		c.setClosedLoopControl(true);
 		
 		//If statement to run a victor from port 4 (defined above) from button 1, defined here
 		if (driverStick.getRawButton(1))
@@ -114,11 +129,7 @@ public class Robot extends IterativeRobot {
 			pistonExtend.set(false);
 			pistonRetract.set(true);	
 		}
-		else
-		{
-			pistonExtend.set(false);
-			pistonRetract.set(true);	
-		}
+		// They recommend you turn both to false with a final else, but I did not do that to see what happens here.
 	
 	}
 
