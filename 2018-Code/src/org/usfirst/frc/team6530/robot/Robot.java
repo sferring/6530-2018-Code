@@ -98,8 +98,22 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		//Main code for driving with gamepad that runs approximately every 20 miliseconds
 		//Get joystick Values assuming left = axis 1 and right = axis 3. These values can be verified on the drivers station.
+		/* Definition of the X box controller
+		 * left stick side to side = axis 0
+		 * left stick up and down = axis 1
+		 * left trigger = axis 2 
+		 * right trigger = axis 3
+		 * right stick side to side = axis 4
+		 * right stick up and down = axis 5
+		 * Xbox Button A = button 0
+		 * Xbox Button B = button 1
+		 * Xbox Button X = button 2
+		 * Xbox Button Y = button 3
+		 * Xbox Button Left Bumper = button 4
+		 * Xbox Button Right Bumper = button 5
+		 */
 		double leftStickValue = driverStick.getRawAxis(1);
-		double rightStickValue = driverStick.getRawAxis(3);
+		double rightStickValue = driverStick.getRawAxis(5);
 		
 		//Send Joystick values to the driver motors
 		leftFrontDrive.set(leftStickValue);
